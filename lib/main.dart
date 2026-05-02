@@ -26,7 +26,44 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Login Screen')));
+    final formKey = GlobalKey<FormState>();
+
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(onPressed: () {}, child: const Text('Login')),
+              const SizedBox(height: 8),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/forgot-password');
+                },
+                child: const Text('Lupa Password?'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
