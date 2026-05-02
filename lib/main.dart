@@ -134,67 +134,72 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
-                ),
-                validator: _validateEmail,
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _passwordController,
-                obscureText: !isPasswordVisible,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isPasswordVisible = !isPasswordVisible;
-                      });
-                    },
-                    icon: Icon(
-                      isPasswordVisible
-                          ? Icons.visibility_off
-                          : Icons.visibility,
+      body: Stack(
+        children: [
+          Container(color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(),
                     ),
+                    validator: _validateEmail,
                   ),
-                ),
-                validator: _validatePassword,
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: !isPasswordVisible,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: const OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isPasswordVisible = !isPasswordVisible;
+                          });
+                        },
+                        icon: Icon(
+                          isPasswordVisible
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                      ),
+                    ),
+                    validator: _validatePassword,
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: isLoading ? null : _login,
+                    child: isLoading
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Text('Login'),
+                  ),
+                  const SizedBox(height: 8),
+                  TextButton(
+                    onPressed: isLoading
+                        ? null
+                        : () {
+                            Navigator.pushNamed(context, '/forgot-password');
+                          },
+                    child: const Text('Lupa Password?'),
+                  ),
+                ],
               ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: isLoading ? null : _login,
-                child: isLoading
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Text('Login'),
-              ),
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: isLoading
-                    ? null
-                    : () {
-                        Navigator.pushNamed(context, '/forgot-password');
-                      },
-                child: const Text('Lupa Password?'),
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -255,14 +260,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Reset link berhasil dikirim')),
+      const SnackBar(content: Text('Link reset telah dikirim ke email Anda')),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Forgot Password')),
+      appBar: AppBar(title: const Text('Lupa Password')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -289,7 +294,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           height: 20,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Text('Send Reset Link'),
+                      : const Text('Kirim Link Reset'),
                 ),
                 const SizedBox(height: 8),
                 TextButton(
@@ -298,7 +303,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       : () {
                           Navigator.pop(context);
                         },
-                  child: const Text('Back to Login'),
+                  child: const Text('Kembali ke Login'),
                 ),
               ],
             ),
@@ -378,7 +383,7 @@ class DashboardScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Welcome, $email',
+                'Selamat datang, $email',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 16),
@@ -393,7 +398,13 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(16),
-                        child: Text(products[index]),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.cake),
+                            const SizedBox(width: 12),
+                            Text(products[index]),
+                          ],
+                        ),
                       ),
                     );
                   },

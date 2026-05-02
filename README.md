@@ -46,15 +46,17 @@ flutter run
 
 ### Login
 
-![Login Screen](docs/screenshots/login.svg)
+<img src="lib/img/loginPage.png" alt="Alt Text" width="auto"/>
+
 
 ### Forgot Password
 
-![Forgot Password Screen](docs/screenshots/forgot-password.svg)
+<img src="lib/img/lupaPass.png" alt="Alt Text" width="auto"/>
 
 ### Dashboard
 
-![Dashboard Screen](docs/screenshots/dashboard.svg)
+<img src="lib/img/dashboard.png" alt="Alt Text" width="auto"/>
+<img src="lib/img/dashboard2.png" alt="Alt Text" width="auto"/>
 
 ## Package yang Digunakan
 
