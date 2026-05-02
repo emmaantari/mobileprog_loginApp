@@ -29,8 +29,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  static const String testEmail = 'admin@gmail.com';
-  static const String testPassword = 'Admin1234';
+  static const String testEmail = 'ema@gmail.com';
+  static const String testPassword = 'password123';
 
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
